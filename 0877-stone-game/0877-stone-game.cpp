@@ -6,7 +6,7 @@ public:
         if(i==0) return piles[i];
         if(dp[i]!=-1) return dp[i];
         int take=f(i-1,piles,dp)+piles[i];
-        int nott=f(i-1,piles,dp)+0;
+        int nott=f(i-2,piles,dp)+0;
         return dp[i]=max(take,nott);
     }
     bool stoneGame(vector<int>& piles) {
