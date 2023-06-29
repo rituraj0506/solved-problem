@@ -1,21 +1,26 @@
 class Solution {
 public:
-    // same as house robber
-    int f(int i,vector<int>&a,vector<int>&dp)
+    // res of this prob is We first transform the nums array into a points array that sums up the total number of points for that particular value. A value of x will be assigned to index x in points.
+
+//nums: [2, 2, 3, 3, 3, 4] (2 appears 2 times, 3 appears 3 times, 4 appears once)
+//points: [0, 0, 4, 9, 4] <- This is the gold in each house!
+    int f(int i,vector<int>&v,vector<int>&dp)
     {
-        if(i>=a.size()) return 0;
+        if(i<0) return 0;
+        if(i==0) return v[0];
         if(dp[i]!=-1) return dp[i];
-        int take=f(i+2,a,dp)+a[i];
-        int nott=f(i+1,a,dp)+0;
-        return dp[i]=max(take,nott);
+        int nott=f(i-1,v,dp)+0;
+        int take=f(i-2,v,dp)+v[i];
+        return dp[i]=max(nott,take);
     }
     int deleteAndEarn(vector<int>& nums) {
-       vector<int>a(10001,0);// indexing 0 to 10^4; 
-        vector<int>dp(10001,-1);
+       vector<int>v(10001,0);
         for(auto it:nums)
         {
-            a[it]+=it;
+           v[it]+=it;
         }
-       return f(0,a,dp);
+        int n=v.size();
+        vector<int>dp(n,-1);
+        return f(n-1,v,dp);
     }
 };
