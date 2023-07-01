@@ -1,21 +1,19 @@
 class Solution {
 public:
-    long long fun(int i,vector<vector<int>>& question,vector<long long>&dp)
+    long long f(int ind,vector<vector<int>>& questions,vector<long long>&dp)
     {
-       int n=question.size();
-        if(i>=n)
-        {
+        int n=questions.size();
+        if(ind>=n)
             return 0;
-        }
-        if(dp[i]!=-1) return dp[i];
-        long long take=question[i][0]+fun(i+question[i][1]+1,question,dp);
-        long long nott=fun(i+1,question,dp);
-        return dp[i]=max(take,nott);
+        if(dp[ind]!=-1) return dp[ind];
+        long long nott=0+f(ind+1,questions,dp);
+        long long take=0;
+        take=questions[ind][0]+f(ind+questions[ind][1]+1,questions,dp);
+        return dp[ind]=max(take,nott);
     }
     long long mostPoints(vector<vector<int>>& questions) {
-        long long n=questions.size();
-        int m=questions[0].size();
-        vector<long long>dp(n,-1);
-        return fun(0,questions,dp);
+        int n=questions.size();
+       vector<long long>dp(n,-1);
+       return f(0,questions,dp);
     }
 };
