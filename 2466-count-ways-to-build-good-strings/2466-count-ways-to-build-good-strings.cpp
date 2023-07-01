@@ -1,18 +1,24 @@
 class Solution {
 public:
     int mod=1e9+7;
-    int fun(int i,int l,int h,int z,int o,vector<int>&dp)
+    int sol(int target,vector<int>&dp,int zero,int one)
     {
-        if(i>=h) return 0;
-        if(dp[i]!=-1) return dp[i];
-       int a= fun(i+z,l,h,z,o,dp);
-        if(i+z>=l&&i+z<=h) a++;
-        int b=fun(i+o,l,h,z,o,dp) ;
-        if(i+o>=l&&i+o<=h) b++;
-        return dp[i]=(a+b)%mod;
+        if(target<0) return 0;
+        if(target==0) return 1;
+	// if target is 0 that means this target can be made so return 1
+        if(dp[target]!=-1) return dp[target];
+        long long sum;
+        // target - a is adding 'a' 0's to the string
+        sum=sol(target-zero,dp,zero,one)+sol(target-one,dp,zero,one);
+        return dp[target]=sum%mod;
     }
-    int countGoodStrings(int l, int h, int z, int o) {
-        vector<int>dp(1e5+1,-1);
-        return fun(0,l,h,z,o,dp);
+    int countGoodStrings(int low, int high, int zero, int one) {
+        int ans=0;
+        vector<int>dp(high+1,-1);
+        for(int i=low;i<=high;i++)
+        {
+           ans=ans%mod+sol(i,dp,zero,one)%mod; 
+        }
+        return ans%mod;
     }
 };
