@@ -28,7 +28,7 @@ public:
        vector<int>ans;
         int n=graph.size();
     vector<bool> vis(n,0);
-	vector<bool> pathvis(n,1);
+	vector<bool> pathvis(n,0);
 	vector<bool> check(n,0);
         for(int i=0;i<n;i++)// in component form
         {
