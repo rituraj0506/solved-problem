@@ -10,7 +10,7 @@ public:
     vector<long long>ans;
     while(n%2==0)
     {
-       ans.push_back(2);
+       maxi=2;
        n=n/2;
     }
     
@@ -18,15 +18,15 @@ public:
     {
         while(n%i==0)
         {
-           ans.push_back(i); 
+           maxi=i; 
            n=n/i;
         }
     }
     
     if(n>2)
-    ans.push_back(n);
+     maxi=n;
     
-    return *max_element(ans.begin(),ans.end());
+    return maxi;
     }
 };
 
