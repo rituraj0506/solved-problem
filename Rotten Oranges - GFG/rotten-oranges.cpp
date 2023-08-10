@@ -36,7 +36,7 @@ class Solution
             {
                 int nr=r+dr[i];
                 int nc=c+dc[i];
-if(nr>=0&&nr<n && nc>=0 && nc<m && ans[nr][nc]==1 && ans[nr][nc]!=2){
+if(nr>=0&&nr<n && nc>=0 && nc<m && ans[nr][nc]==1){
     ans[nr][nc]=2;
     q.push({{nr,nc},t+1});
 }
