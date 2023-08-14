@@ -9,42 +9,44 @@ using namespace std;
 
 class Solution {
   public:
-  void dfs(int r,int c,vector<vector<int>>& grid, vector<pair<int,int>>&v,int row0,int col0,vector<vector<int>>&vis)
+  void dfs(int r,int c,vector<vector<int>>& grid,vector<vector<int>>&vis,int r1,int c1,vector<pair<int,int>>&v)
   {
      int n=grid.size();
-    int m=grid[0].size();
+     int m=grid[0].size();
       vis[r][c]=1;
-      v.push_back({r-row0,c-col0});
+      v.push_back({r-r1,c-c1});
       int dr[]={-1,0,+1,0};
       int dc[]={0,+1,0,-1};
+      
       for(int i=0;i<4;i++)
       {
-         int nr=r+dr[i];
-         int nc=c+dc[i];
-         if(nr>=0 && nr<n && nc>=0 && nc<m && grid[nr][nc]==1 && !vis[nr][nc])
-         {
-          dfs(nr,nc,grid,v,row0,col0,vis);   
-         }
+       int nr=r+dr[i];
+       int nc=c+dc[i];
+if(nr>=0 && nr<n && nc>=0 && nc<m && grid[nr][nc]==1&& !vis[nr][nc])
+{
+    vis[nr][nc]=1;
+    dfs(nr,nc,grid,vis,r1,c1,v);
+}
       }
   }
     int countDistinctIslands(vector<vector<int>>& grid) {
-    int n=grid.size();
-    int m=grid[0].size();
-    vector<vector<int>>vis(n,vector<int>(m,0));
-    set<vector<pair<int,int>>>st;
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<m;j++)
+        int n=grid.size();
+        int m=grid[0].size();
+        vector<vector<int>>vis(n,vector<int>(m,0));
+        set<vector<pair<int,int>>>s;
+        for(int i=0;i<n;i++)
         {
-            if(grid[i][j]==1 && !vis[i][j])
+            for(int j=0;j<m;j++)
             {
-              vector<pair<int,int>>v;
-              dfs(i,j,grid,v,i,j,vis);
-              st.insert(v);
+              if(grid[i][j]==1&&!vis[i][j]) 
+              {
+                  vector<pair<int,int>>v;
+                  dfs(i,j,grid,vis,i,j,v);
+                  s.insert(v);
+              }
             }
         }
-    }
-    return st.size();
+        return s.size();
     }
 };
 
