@@ -40,8 +40,8 @@ class Solution
 	   	    {
 	   	      int nr=r+dr[i];
 	   	      int nc=c+dc[i];
-if(nr>=0 && nc>=0 && nr<n && nc<m && !vis[nr][nc])
-{
+if(nr>=0 && nc>=0 && nr<n && nc<m && grid[nr][nc]==0&&!vis[nr][nc])
+{// vice versa also true;
     q.push({{nr,nc},dis+1});
     vis[nr][nc]=1;
 }
