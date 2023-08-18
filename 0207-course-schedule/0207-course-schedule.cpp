@@ -1,33 +1,32 @@
 class Solution {
 public:
-    bool canFinish(int n, vector<vector<int>>& nums) {
-     // topological sort
-        // given  vector denoteds node and edge first converted into adj list for dag
+    bool canFinish(int n, vector<vector<int>>& prerequisites) {
         vector<int>adj[n];
-        for(auto it:nums)
+        for(auto it:prerequisites)
         {
-           adj[it[1]].push_back(it[0]);
+         adj[it[0]].push_back(it[1]);
         }
-        
         vector<int>indeg(n,0);
+        queue<int>q;
+        
         for(int i=0;i<n;i++)
         {
-        for(auto it:adj[i])
-            indeg[it]++; 
+            for(auto it:adj[i])
+                indeg[it]++;
         }
         
-        queue<int>q;
-        for(int i=0;i<n;i++)
+         for(int i=0;i<n;i++)
         {
-            if(indeg[i]==0)
-                q.push(i);
+               if(indeg[i]==0)
+                 q.push(i);
         }
-        vector<int>topo;
+        
+        int c=0;
         while(!q.empty())
         {
             int node=q.front();
             q.pop();
-            topo.push_back(node);
+            c++;
             
             for(auto it:adj[node])
             {
@@ -36,7 +35,10 @@ public:
                     q.push(it);
             }
         }
-        if(topo.size()==n) return true;// means cycle
-        return false;
+        
+        if(c==n) return true;
+        else
+            return false;
+        
     }
 };
