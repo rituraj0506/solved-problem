@@ -13,15 +13,15 @@ public:
     ListNode* rotateRight(ListNode* head, int k) {
        if(head==NULL||head->next==NULL)
             return head;
+       int c=1;
        ListNode*temp=head;
-        int c=1;
         while(temp->next!=NULL)
         {
             c++;
             temp=temp->next;
         }
         temp->next=head;
-        k=k%c;
+          k=k%c;
         int len=c-k;
         while(len--)
         {
@@ -29,6 +29,7 @@ public:
         }
         head=temp->next;
         temp->next=NULL;
+        
         return head;
     }
 };
