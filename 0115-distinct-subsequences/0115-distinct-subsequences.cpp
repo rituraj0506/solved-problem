@@ -1,18 +1,20 @@
 class Solution {
 public:
-    int f(int i,int j,string &s,string &t,vector<vector<int>>&dp)
+    int f(int ind1,int ind2,string &s, string &t,vector<vector<int>>&dp)
     {
-        if(j<0) return 1;// means whole t are match in s
-        if(i<0) return 0;
-        if(dp[i][j]!=-1) return dp[i][j];
-        if(s[i]==t[j]) return dp[i][j]=(f(i-1,j-1,s,t,dp)+f(i-1,j,s,t,dp));
+        // all char of s2 match then return 1
+        if(ind2<0) return 1;
+        if(ind1<0) return 0;
+        if(dp[ind1][ind2]!=-1) return dp[ind1][ind2];
+        if(s[ind1]==t[ind2])
+        return dp[ind1][ind2]=(f(ind1-1,ind2-1,s,t,dp)+f(ind1-1,ind2,s,t,dp));
         else
-            return dp[i][j]=f(i-1,j,s,t,dp);
+            return dp[ind1][ind2]=f(ind1-1,ind2,s,t,dp);
     }
     int numDistinct(string s, string t) {
-       int n=s.size();
-       int n1=t.size();
-        vector<vector<int>>dp(n,vector<int>(n1+1,-1));
-        return f(n-1,n1-1,s,t,dp);
+        int m=s.size();
+        int n=t.size();
+        vector<vector<int>>dp(m,vector<int>(n,-1));
+        return f(m-1,n-1,s,t,dp);
     }
 };
