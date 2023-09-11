@@ -17,9 +17,12 @@ public:
         {
             int b=maxh.top().first;
             int c=maxh.top().second;
-            if(k>0)
+            if(k>0){
             ans.push_back(c);
               k--;
+            }
+            else
+                break;
             maxh.pop();
         }
         return ans;
