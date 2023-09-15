@@ -12,7 +12,7 @@ public:
     bool f(int ind,int arr[],int tar, vector<vector<int>>&dp)
     {
         if(ind==0) return (arr[0]==tar);
-        if(tar==0) return true;
+       // if(tar==0) return true;
         if(dp[ind][tar]!=-1) return dp[ind][tar];
         int nott=f(ind-1,arr,tar,dp);
         int take=0;
