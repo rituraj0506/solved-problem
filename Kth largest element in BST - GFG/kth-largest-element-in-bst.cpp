@@ -97,17 +97,19 @@ struct Node {
 class Solution
 {
     public:
-     int c=0,res=0;
+    void traverse(Node*root,int k,int &ans,int &c)
+    {
+        if(root==NULL) return;
+        traverse(root->right,k,ans,c);
+        c++;
+        if(c==k) ans=root->data;
+        traverse(root->left,k,ans,c);
+    }
     int kthLargest(Node *root, int k)
     {
-        if(root==NULL)
-            return 0;
-        kthLargest(root->right,k);
-        c++;
-        if(c==k)
-            res=root->data;
-        kthLargest(root->left,k);
-        return res;  
+        int ans=0,c=0;
+      traverse(root,k,ans,c);
+      return ans;
     }
 };
 
