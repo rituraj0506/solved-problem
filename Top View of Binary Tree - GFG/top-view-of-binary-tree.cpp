@@ -105,31 +105,32 @@ class Solution
     vector<int> topView(Node *root)
     {
      vector<int>ans;
-     if(root==NULL) return ans;
-     map<int,int>m;
      queue<pair<Node*,int>>q;
      q.push({root,0});
+     map<int,int>m;
      while(!q.empty())
      {
-        auto it=q.front();
-         q.pop();
-        Node*node=it.first;
-        int line=it.second;
-        if(m.find(line)==m.end())
-        m[line]=node->data;
+      auto it=q.front();
+      q.pop();
+      Node*node=it.first;
+      int val=it.second;
+      if(m.find(val)==m.end())
+        m[val]=node->data;
         if(node->left!=NULL)
-        q.push({node->left,line-1});
+        q.push({node->left,val-1});
         if(node->right!=NULL)
-        q.push({node->right,line+1});
+        q.push({node->right,val+1});
      }
      for(auto it:m)
      {
          ans.push_back(it.second);
      }
      return ans;
-    
     }
+
 };
+
+
 
 //{ Driver Code Starts.
 
