@@ -6,26 +6,27 @@ public:
     }
     
     void push(int x) {
-        q.push(x);
-        for(int i=0;i<q.size()-1;i++)
-        {
-            q.push(q.front());
-            q.pop();
-        }
+     q.push(x);
+    for(int i=0;i<q.size()-1;i++)
+    {
+      q.push(q.front());
+        q.pop();
+     }
     }
     
     int pop() {
-        int val=q.front();
+     int val=q.front();
         q.pop();
         return val;
     }
     
     int top() {
-        return q.front();
+      int val=q.front();
+        return val;
     }
     
     bool empty() {
-        return q.empty();
+        return q.size()==0;
     }
 };
 
