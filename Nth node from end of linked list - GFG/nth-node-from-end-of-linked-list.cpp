@@ -41,29 +41,29 @@ class Solution{
 public:
     int getNthFromLast(Node *head, int n)
     {
-           int c=0;
-           Node*prv=head;
-          while(prv!=NULL)
-           {
-               c++;
-               prv=prv->next;
-           }
-            if(c<n)
-           return -1;
-         
+        // if total node less than n return -1
+        int c=0;
+        Node*cn=head;
+        while(cn!=NULL)
+        {
+            c++;
+            cn=cn->next;
+        }
+        if(c<n)
+        return -1;
+        
         Node*temp=head;
-           while(n--)
-           {
-            temp=temp->next; 
-           }
-           Node*tmp=head;
-           while(temp!=NULL)
-           {
-               tmp=tmp->next;
-               temp=temp->next;
-           }
-          
-           return tmp->data;
+          while(n--)
+          {
+            temp=temp->next;  
+          }
+          Node*prev=head;
+          while(temp!=NULL)
+          {
+              prev=prev->next;
+              temp=temp->next;
+          }
+          return prev->data;
     }
 };
 
