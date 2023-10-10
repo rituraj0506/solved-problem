@@ -12,20 +12,18 @@ class Solution{
     //Function to find the leaders in the array.
     public:
     vector<int> leaders(int a[], int n){
-    vector<int>ans;
     int maxi=a[n-1];
-    
+    vector<int>res;
     for(int i=n-1;i>=0;i--)
     {
-        if(a[i]>=maxi)
-        {
-            ans.push_back(a[i]);
-            maxi=a[i];
+        if(a[i]>=maxi){
+          maxi=a[i];
+        res.push_back(maxi);
         }
-    }
-    reverse(ans.begin(),ans.end());
-    return ans;
         
+    }
+    reverse(res.begin(),res.end());
+      return res;  
     }
 };
 
