@@ -26,24 +26,25 @@ int main() {
 
 
 pair<int, int> getFloorAndCeil(int arr[], int n, int x) {
-    int ceil=-1,floor=-1;
+    // code here
+    int l=0,r=n-1;
+    int fl=-1,cl=-1;
     sort(arr,arr+n);
-    int l=0,h=n-1; 
-    while(l<=h)
+    while(l<=r)
     {
-        int mid=l+(h-l)/2;
+        int mid=l+(r-l)/2;
         if(arr[mid]==x)
         return {arr[mid],arr[mid]};
-        if(arr[mid]<x)
+        else if(arr[mid]<x)
         {
-            floor=arr[mid];
-            l=mid+1;
+         fl=arr[mid];
+         l=mid+1;
         }
         else if(arr[mid]>x)
         {
-            ceil=arr[mid];
-            h=mid-1;
+          cl=arr[mid];
+          r=mid-1;
         }
     }
-    return {floor,ceil};
+    return {fl,cl};
 }
