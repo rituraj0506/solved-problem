@@ -11,17 +11,17 @@
  */
 class Solution {
 public:
-    TreeNode*fun(int &i,vector<int>&a,int maxi)
+    TreeNode* build(vector<int>& a,int &i,int maxi)
     {
-        int n=a.size();
-        if(i==n||a[i]>maxi) return NULL;
-         TreeNode*root=new TreeNode(a[i++]);
-        root->left=fun(i,a,root->val);
-        root->right=fun(i,a,maxi);
+        if(i==a.size() ||a[i]>maxi) return NULL;
+        TreeNode*root=new TreeNode(a[i++]);
+        root->left=build(a,i,root->val);
+        root->right=build(a,i,maxi);
         return root;
+        
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
         int i=0;
-       return  fun(i,preorder,INT_MAX);// assume intmax is right side val
+      return  build(preorder,i,INT_MAX);
     }
 };
