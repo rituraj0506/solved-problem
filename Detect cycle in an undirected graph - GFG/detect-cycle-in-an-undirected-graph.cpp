@@ -6,43 +6,42 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in an undirected graph.
-    bool det(int vis[],int i,vector<int>adj[])
+    bool dect(int node,vector<int>&vis, vector<int> adj[])
     {
-        vis[i]=1;
         queue<pair<int,int>>q;
-        q.push({i,-1});
+        q.push({node,-1});
+        vis[node]=1;
         while(!q.empty())
         {
-            int node=q.front().first;
-            int pnode=q.front().second;
-                    q.pop();
+            auto it=q.front();
+            int node=it.first;
+            int parn=it.second;
+            q.pop();
             for(auto it:adj[node])
             {
-                if(!vis[it])
-                {
-                    vis[it]=1;
-                    q.push({it,node});
-                }
-      // someone is vis but it is not parent it cycle
-                else if(pnode!=it)
-                {
-                    return true;
-                }
+            if(!vis[it])
+            {
+                q.push({it,node});
+                vis[it]=1;
+            }
+            else if(parn!=it)
+            {
+                return true;
+            }
             }
         }
         return false;
     }
     bool isCycle(int V, vector<int> adj[]) {
-     int vis[V]={0};
-     for(int i=0;i<V;i++)
-     {
-         if(!vis[i])
-         {
-             if(det(vis,i,adj))
-             return true;
-         }
-     }
-     return false;
+        vector<int>vis(V,0);
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])
+            {
+               if(dect(i,vis,adj)) return true;;
+            }
+        }
+        return false;
     }
 };
 
