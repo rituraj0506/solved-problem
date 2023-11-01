@@ -9,7 +9,7 @@ using namespace std;
 
 class Solution {
   public:
-  void dfs(int r,int c,vector<vector<int>>& grid,vector<vector<int>>&vis,int r1,int c1,vector<pair<int,int>>&v)
+ void dfs(int r,int c,vector<vector<int>>& grid,vector<vector<int>>&vis,int r1,int c1,vector<pair<int,int>>&v)
   {
      int n=grid.size();
      int m=grid[0].size();
@@ -38,15 +38,16 @@ if(nr>=0 && nr<n && nc>=0 && nc<m && grid[nr][nc]==1&& !vis[nr][nc])
         {
             for(int j=0;j<m;j++)
             {
-              if(grid[i][j]==1&&!vis[i][j]) 
-              {
-                  vector<pair<int,int>>v;
-                  dfs(i,j,grid,vis,i,j,v);
-                  s.insert(v);
-              }
+                if(grid[i][j]==1 && !vis[i][j])
+                {
+                    vector<pair<int,int>>v;
+                    dfs(i,j,grid,vis,i,j,v);
+                    s.insert(v);
+                }
             }
         }
         return s.size();
+    
     }
 };
 
