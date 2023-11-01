@@ -5,36 +5,37 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-     bool check(int st,vector<int>&col, vector<int>adj[])
-     {
-         queue<int>q;
-         q.push(st);
-         col[st]=0;
-         while(!q.empty())
-         {
-        int node=q.front();
-             q.pop();
-         for(auto it:adj[node])
-         {
-           if(col[it]==-1)
-           {
-               col[it]=!col[node];
-               q.push(it);
-           }
-           else if(col[it]==col[node])
-           return false;
-         }
-         }
-         return true;
-     }
+    bool check(int stnode,vector<int>&col,vector<int>adj[])
+    {
+        queue<int>q;
+        q.push(stnode);
+        col[stnode]=0;
+        while(!q.empty())
+        {
+            int node=q.front();
+            q.pop();
+            for(auto it:adj[node])
+            {
+                if(col[it]==-1)
+                {
+                    col[it]=!col[node];
+                    q.push(it);
+                }
+                else if(col[it]==col[node])
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 	bool isBipartite(int V, vector<int>adj[]){
 	    vector<int>col(V,-1);
 	    for(int i=0;i<V;i++)
 	    {
-	        if(col[i]==-1)
-	        {
-	            if(check(i,col,adj)==false)
-	            return false;
+	        if(col[i]==-1){
+	       if(check(i,col,adj)==false) 
+	       return false;
 	        }
 	    }
 	    return true;
